@@ -35,9 +35,6 @@ public class MainClass {
         elements.add(elementsHeadings);
         elements.add(elementsAuthors);
         elements.add(elementsPrice);
-        elements.add(elementsHeadings);
-        elements.add(elementsAuthors);
-        elements.add(elementsPrice);
 
         for (List<WebElement> webElement : elements) {
             for (WebElement elementsHeading : elementsHeadings) {
