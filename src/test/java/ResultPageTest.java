@@ -41,11 +41,7 @@ public class ResultPageTest {
         driver.get("https://www.amazon.com/Head-First-Java-Kathy-Sierra/dp/0596009208/ref=sr_1_11?keywords=Java&qid=1656507840&s=books&sr=1-11");
         BookDetailsPage bookDetailsPage = new BookDetailsPage(driver);
         Book details = bookDetailsPage.getDetails();
-        for (Book book : books) {
-            Assert.assertTrue(book.getCover().contains(details.getCover()));
-        }
-
-
+        Assert.assertTrue(books.contains(details));
     }
 
     @After

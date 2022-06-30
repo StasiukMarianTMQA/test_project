@@ -1,16 +1,16 @@
 package PageObject;
 
+import java.util.Objects;
+
 public class Book {
     private String name;
-    private String date;
     private String cover;
 
     public Book() {
     }
 
-    public Book(String name, String author, String cover) {
+    public Book(String name, String cover) {
         this.name = name;
-        this.date = author;
         this.cover = cover;
     }
 
@@ -22,14 +22,6 @@ public class Book {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getCover() {
         return cover;
     }
@@ -39,10 +31,22 @@ public class Book {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(name, book.name) && Objects.equals(cover, book.cover);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, cover);
+    }
+
+    @Override
     public String toString() {
         return "Book{" +
                 "name='" + name + '\'' +
-                ", date='" + date + '\'' +
                 ", cover='" + cover + '\'' +
                 '}';
     }
