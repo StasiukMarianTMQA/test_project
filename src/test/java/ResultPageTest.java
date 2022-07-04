@@ -2,21 +2,19 @@ import PageObject.Book;
 import PageObject.BookDetailsPage;
 import PageObject.NavigationPage;
 import PageObject.ResultSearchPage;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ResultPageTest {
-        private WebDriver driver;
-        private NavigationPage navigationPage;
+    private WebDriver driver;
+    private NavigationPage navigationPage;
 
-    @Before
+    @BeforeMethod
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\lilma\\IdeaProjects\\test_project\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
@@ -27,25 +25,27 @@ public class ResultPageTest {
         navigationPage.valueFinder();
     }
 
-    @Test
-        public void checkSwitchPage (){
+    @Test(priority = 1)
+    public void checkSwitchPage() {
         ResultSearchPage resultSearchPage = new ResultSearchPage(driver);
         String resultWord = resultSearchPage.getResultWord();
-        Assert.assertEquals("RESULTS" , resultWord);
+        Assert.assertEquals("RESULTS", resultWord);
     }
 
-    @Test
-    public void checkList(){
+    @Test(priority = 2)
+    public void checkList() {
         ResultSearchPage resultSearchPage = new ResultSearchPage(driver);
         List<Book> books = resultSearchPage.getBooks();
-        driver.get("https://www.amazon.com/Head-First-Java-Kathy-Sierra/dp/0596009208/ref=sr_1_11?keywords=Java&qid=1656507840&s=books&sr=1-11");
+        System.out.println(books);
+        driver.get("https://www.amazon.com/Head-First-Java-Brain-Friendly-Guide/dp/1491910771/ref=sr_1_2?crid=1LP2U5GS8KJ17&keywords=Java&qid=1656920954&s=books&sprefix=java%2Cstripbooks-intl-ship%2C164&sr=1-2");
         BookDetailsPage bookDetailsPage = new BookDetailsPage(driver);
         Book details = bookDetailsPage.getDetails();
+        System.out.println(details);
         Assert.assertTrue(books.contains(details));
     }
 
-    @After
-    public void tearDown(){
+    @AfterMethod
+    public void tearDown() {
         driver.quit();
     }
 
